@@ -67,14 +67,14 @@ String indexPage()
         " function sendData(id){ " 
             " $.ajax({url:'/send/'+id})" 
             " .done((result) => { if(id === result['command']){  console.log('done'); }else{ console.log(result); } }); " 
-            " clickTimer = window.setTimeout(sendData.bind(this, id), 150); "
+            " clickTimer = window.setTimeout(sendData.bind(this, id), 200); "
         " } " 
-        " function stopdata(){ "
+        " function stopData(){ "
             " if(clickTimer) window.clearTimeout(clickTimer); "
             " clickTimer = null; "
         " } "
-        " window.addEventListener(\"mouseup\", stopdata; " 
-        " window.addEventListener(\"touchend\", stopdata; " 
+        " window.addEventListener(\"mouseup\", stopData); " 
+        " window.addEventListener(\"touchend\", stopData); " 
         "</script>" 
         "<style>" 
             ".btn{ width: 6em; }" 
@@ -183,11 +183,13 @@ void loop()
           request.replace(" HTTP/1.1", "");
           request.replace("GET /send/", "");
     
-          client.println(responsePage(request));
-          client.stop();
         
           irsend.sendNEC(request.toInt(), 32);
           delay(50);
+
+          client.println(responsePage(request));
+          client.stop();
+
           return;
 
         }
